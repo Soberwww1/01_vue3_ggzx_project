@@ -2,11 +2,43 @@
     "plugins": ["stylelint-prettier"],
     "extends": [
         "stylelint-config-standard",
+        "stylelint-config-standard-scss",
         "stylelint-config-recommended-less",
-        "stylelint-config-prettier"
+        "stylelint-config-html/vue",
+        "stylelint-config-prettier",
+        "stylelint-config-recess-order"
+
     ],
     "customSyntax": "postcss-less",
+    "overrides": [
+        {
+             "files": ["**/*.vue"],
+            "customSyntax": "postcss-html"
+        }
+    ],
     "rules": {
-        "prettier/prettier": true
+        "prettier/prettier": true,
+        "value-keyword-case": null,
+        "no-descending-specificity": null,
+        "function-url-quotes": "always",
+        "no-empty-source": null,
+        "selector-class-pattern": null,
+        "property-no-unknown": null,
+        "block-opening-brace-space-before": "always",
+        "value-no-vendor-prefix": null,
+        "property-no-vendor-prefix": null,
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": ["global", "v-deep", "deep", "slotted"]
+            }
+        ],
+        "at-rule-no-unkown": [
+            true,
+            {
+                "ignoreAtRules": ["extends", "mixin", "include", "if", "else", "for", "each"]
+            }
+        ],
+       "scss/at-rule-no-unknown": null
     }
 }

@@ -4,3 +4,8 @@ coverage
 
 # Ignore all HTML files:
 *.html
+**/*.svg
+**/*.sh
+node_modules
+dist
+public
