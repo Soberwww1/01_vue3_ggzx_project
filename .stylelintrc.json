@@ -10,14 +10,8 @@
 
     ],
     "customSyntax": "postcss-less",
-    "overrides": [
-        {
-             "files": ["**/*.vue"],
-            "customSyntax": "postcss-html"
-        }
-    ],
     "rules": {
-        "prettier/prettier": true,
+        "prettier/prettier": false,
         "value-keyword-case": null,
         "no-descending-specificity": null,
         "function-url-quotes": "always",

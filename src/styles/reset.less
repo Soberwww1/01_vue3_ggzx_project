@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  body {
+    margin: 0;
+    line-height: 1;
+  }
+  
+  article,
+  aside,
+  footer,
+  header,
+  nav,
+  section,
+  main,
+  figcaption,
+  figure,
+  menu,
+  details {
+    display: block;
+  }
+  
+  audio,
+  canvas,
+  video {
+    display: inline-block;
+  }
+  
+  img {
+    display: block;
+    border: 0;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  address,
+  cite,
+  dfn,
+  em,
+  var {
+    font-style: normal;
+  }
+  
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  a {
+    background-color: transparent;
+    font-size: inherit;
+    color: inherit;
+    text-decoration: none;
+  
+    &:active,
+    &:hover {
+      outline: 0;
+    }
+  }
+  
+  :focus {
+    outline: 0;
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+    margin: 0;
+    font-size: inherit;
+  }
+  
+  button,
+  html [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background-color: transparent;
+    appearance: button;          /* 标准属性 (优先级高) */
+    -webkit-appearance: button;  /* 兼容旧版 WebKit */
+    cursor: pointer;
+  }
+
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  input {
+    padding: 0;
+    line-height: normal;
+
+    &::placeholder {               /* 标准属性 */
+      font-weight: 300;
+    }
+    &::-webkit-input-placeholder { /* 兼容旧版 WebKit */
+      font-weight: 300;
+    }
+    &::-moz-placeholder {          /* 兼容 Firefox */
+      font-weight: 300;
+    }
+    &::-ms-input-placeholder {     /* 兼容 IE/Edge */
+      font-weight: 300;
+    }
+  }
+
+  [type="number"] {
+    appearance: textfield;           /* 标准属性 */
+    -moz-appearance: textfield;      /* 兼容 Firefox */
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
+      height: auto;
+      appearance: none;              /* 标准属性 */
+      -webkit-appearance: none;      /* 兼容旧版 WebKit */
+    }
+  }
+
+  [type="search"] {
+    appearance: textfield;           /* 标准属性 */
+    -webkit-appearance: textfield;   /* 兼容旧版 WebKit */
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      appearance: none;              /* 标准属性 */
+      -webkit-appearance: none;      /* 兼容旧版 WebKit */
+    }
+  }
+
+  textarea {
+    overflow: auto;
+    resize: none;
+    appearance: none;                /* 标准属性 */
+    -webkit-appearance: none;        /* 兼容旧版 WebKit */
+  }
+
+  select {
+    appearance: none;                /* 标准属性 */
+    -webkit-appearance: none;        /* 兼容旧版 WebKit */
+    background-color: #fff;
+  }
+
+    
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }

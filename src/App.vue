@@ -1,19 +1,8 @@
-<script setup>
-console.log('jiji')
-console.log('jiji')
-const name = () => {
-  console.log('测试prettier是否执行')
-}
-name()
-
-const a = 12
-console.log(a)
-</script>
+<script setup></script>
 
 <template>
-  <div class="container">
-    <h1>Hello world!!!</h1>
-  </div>
+  <!-- 一个可以被复用的公共后台管理系统模板 --- 内核组件化、复用性 -->
+  <router-view></router-view>
 </template>
 
 <style lang="less" scoped></style>
