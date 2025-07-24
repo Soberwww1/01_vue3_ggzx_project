@@ -1,5 +1,7 @@
 // 导入各个Components组件
 import SvgIcon from '@/components/SvgIcon/index.vue'
+// 导入全局icon图标
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 //  定义一个对象整合要注册的全局组件
 const allGlobalCompoents = {
@@ -12,9 +14,12 @@ export default {
     // 自定义组件添加特定前缀 --- Custom
     const CUSTOM_PREFIX = 'Custom'
     // 开始注册
-    // app.component(`${CUSTOM_PREFIX}SvgIcon`, SvgIcon)
     Object.keys(allGlobalCompoents).forEach((item) => {
       app.component(`${CUSTOM_PREFIX + item}`, allGlobalCompoents[item])
     })
+    // 逐个导入icon
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(key, component)
+    }
   },
 }

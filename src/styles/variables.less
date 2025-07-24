@@ -1,2 +1,23 @@
 // 这是一个 less样式 全局变量包
 @base-color: red;
+// 控制首页架子左边导航菜单栏的宽度
+@base-menu-width: 300px;
+
+/* 
+左侧菜单 logo 高度设置 --- 虽然操控logo盒子高度的是--base-menu-logo-height变量，
+但是这个变量的内核还是通过@base-temp-menu-logo-height控制，
+当@base-temp-menu-logo-height小于100px时，得让高度为100px，于是取@base-temp-menu-logo-height与100px之间最大值为logo盒子高度
+*/
+:root {
+    --base-menu-logo-height: max(100px, @base-temp-menu-logo-height);
+}
+@base-temp-menu-logo-height: 100px;
+
+// 左侧导航栏主题色
+@cyberpunk-gradient: linear-gradient(90deg,
+    red 0%, 
+    #00ffff 30%, 
+    #00ffcc 50%, 
+    #33ff00 70%, 
+    yellowgreen 100%
+);

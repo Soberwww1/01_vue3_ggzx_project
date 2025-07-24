@@ -129,23 +129,21 @@ const onSubmit = async () => {
     width: 80%;
     border-radius: 30px;
     .el-form-item {
-      // background-color: blueviolet;
       padding: 10px 15px;
       h1 {
         height: 50px;
         font-size: 40px;
-        font-weight: bolder;
         background: linear-gradient(300deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
       }
       h2 {
         font-size: 26px;
-        font-weight: bolder;
         margin-top: -25px;
         background: linear-gradient(162deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
       }
 
       h1,
       h2 {
+        font-weight: bolder;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;

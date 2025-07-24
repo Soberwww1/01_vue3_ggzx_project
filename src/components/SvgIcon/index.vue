@@ -31,4 +31,9 @@ defineProps({
   </svg>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+svg {
+  min-width: 50px;
+  min-height: 50px;
+}
+</style>
