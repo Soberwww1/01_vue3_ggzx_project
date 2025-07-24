@@ -1,5 +1,10 @@
 <script setup>
+// 导入路由组件
 import { useRouter } from 'vue-router'
+// 导入仓库组件
+import { useLayOutSettingStore } from '@/stores/index'
+
+// 自命名 --- 梳理结构时更清晰
 defineOptions({
   name: 'layoutMenu',
 })
@@ -8,12 +13,13 @@ defineProps({
     type: Array,
   },
 })
-
+// 创建仓库实例
+const layoutSettingStore = useLayOutSettingStore()
 // 创建路由实例
 const router = useRouter()
 // 实现导航路由跳转
 const handleSkip = (path) => {
-  console.log(path)
+  // console.log(path)
   router.push(path)
 }
 </script>
@@ -32,8 +38,8 @@ const handleSkip = (path) => {
       :index="item.path"
       v-if="!item.children && item.meta.show"
     >
+      <el-icon :size="20"><component :is="item.meta.icon" /></el-icon>
       <span v-if="!item.children && item.meta.show">
-        <el-icon :size="20"><component :is="item.meta.icon" /></el-icon>
         {{ item.meta.title }}
       </span>
     </el-menu-item>
@@ -42,20 +48,19 @@ const handleSkip = (path) => {
       :index="item.path"
       v-if="item.children && item.children.length === 1 && item.children[0].meta.show"
     >
+      <el-icon :size="20"><component :is="item.children[0].meta.icon" /></el-icon>
       <span v-if="item.children && item.children.length === 1 && item.children[0].meta.show">
-        <el-icon :size="20"><component :is="item.children[0].meta.icon" /></el-icon>
         {{ item.children[0].meta.title }}
       </span>
     </el-menu-item>
     <!-- 多级 -->
     <el-sub-menu :index="item.path" v-if="item.children && item.children.length > 1">
       <template #title>
-        <span>
-          <el-icon :size="20"><component :is="item.meta.icon" /></el-icon>
-          {{ item.meta.title }}
-        </span>
+        <el-icon :size="20"><component :is="item.meta.icon" /></el-icon>
+        <span>{{ item.meta.title }}</span>
       </template>
-      <el-menu-item-group>
+      <el-menu-item-group :class="{ foldmenu: layoutSettingStore.isCollopse }">
+        <!-- 路由迭代 -->
         <layoutMenu :menulist="item.children"></layoutMenu>
       </el-menu-item-group>
     </el-sub-menu>
@@ -66,26 +71,27 @@ const handleSkip = (path) => {
 .menu {
   --el-menu-bg-color: transparent;
   border-radius: 30px;
-  .el-sub-menu span {
+  .el-sub-menu span,
+  .el-menu-item span {
     font-size: 20px;
     font-weight: bold;
-    margin-left: 20px;
-  }
-  .el-sub-menu .el-menu-item {
-    margin-bottom: 5px;
   }
   .el-menu-item {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    // margin-bottom: 10px;
-    margin-top: 20px;
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+    margin: 15px 0;
     border-radius: 30px;
   }
-  .el-menu-item span {
-    margin: 0 auto;
-    font-size: 20px;
-    font-weight: bold;
-    // background-color: ;
+  .el-icon {
+    margin-right: 10px;
+  }
+}
+
+// 额外导航标签
+.foldmenu {
+  .el-menu-item {
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
   }
 }
 </style>

@@ -9,3 +9,4 @@ export default pinia
 
 export * from '@/stores/modules/user'
 export * from '@/stores/modules/route'
+export * from '@/stores/modules/tobbar'

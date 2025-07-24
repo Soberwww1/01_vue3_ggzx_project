@@ -2,6 +2,8 @@
 @base-color: red;
 // 控制首页架子左边导航菜单栏的宽度
 @base-menu-width: 300px;
+// 左侧导航栏最小宽度
+@base-menu-min-width: 53px;
 
 /* 
 左侧菜单 logo 高度设置 --- 虽然操控logo盒子高度的是--base-menu-logo-height变量，
@@ -11,13 +13,5 @@
 :root {
     --base-menu-logo-height: max(100px, @base-temp-menu-logo-height);
 }
-@base-temp-menu-logo-height: 100px;
 
-// 左侧导航栏主题色
-@cyberpunk-gradient: linear-gradient(90deg,
-    red 0%, 
-    #00ffff 30%, 
-    #00ffcc 50%, 
-    #33ff00 70%, 
-    yellowgreen 100%
-);
+@base-temp-menu-logo-height: 100px;

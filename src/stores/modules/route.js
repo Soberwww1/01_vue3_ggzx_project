@@ -5,13 +5,13 @@ import { ref } from 'vue'
 // 导入路由
 import { constantRoute } from '@/router/routes'
 
-export const useRouteStore = defineStore(
-  'route',
+export const useRoutesStore = defineStore(
+  'routes',
   () => {
     // 设置路由 --- 为了菜单导航做准备
-    const route = ref([...constantRoute])
+    const routes = ref([...constantRoute])
     return {
-      route,
+      routes,
     }
   },
   {

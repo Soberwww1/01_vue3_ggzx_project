@@ -56,7 +56,7 @@ export const constantRoute = [
     meta: {
       title: '权限管理',
       show: true,
-      icon: 'Lock',
+      icon: 'Checked',
     },
     redirect: '/permiss/user',
     // 权限管理一级路由下具有很多二级路由

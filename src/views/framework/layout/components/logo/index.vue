@@ -1,5 +1,9 @@
 <script setup>
 import setting from '@/setting'
+// 自命名 --- 梳理结构时更清晰
+defineOptions({
+  name: 'layoutLogo',
+})
 </script>
 
 <template>
@@ -20,7 +24,7 @@ import setting from '@/setting'
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgb(152, 141, 159);
-  border-radius: 0 0 15px 15px;
+  // border-radius: 0 0 15px 15px;
   box-shadow: 0 10px 50px 0 rgb(0, 0, 0);
   width: 100%;
   // 使用全局变量控制导航栏中logo高度
