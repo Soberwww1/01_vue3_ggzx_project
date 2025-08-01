@@ -1,31 +1,28 @@
 <script setup>
+// 导入基础组件、路由组件、elementPlus图标
 import { ref } from 'vue'
-import { Lock, User } from '@element-plus/icons-vue'
-
-// 导入pinia仓库 --- 存储用户名 & 用户密码 & Token
-import { useUserStore } from '@/stores/index'
-// 导入路由组件
 import { useRouter } from 'vue-router'
-// 导入自己封装API --- 验证登录
-import { userLoginService } from '@/api/user'
-// 导入自己封装判断时间函数
-import getTimeService from '@/utils/time'
-import { ElNotification } from 'element-plus'
+import { Lock, User } from '@element-plus/icons-vue'
+import { ElMessage, ElNotification } from 'element-plus'
 
-// 创建pinia --- userStore实例
-const userStore = useUserStore()
+// 导入工具函数 --- 用户登录逻辑逻辑操作函数（封装了仓库数据的增删、数据请求api的应用）、判断当前时间函数
+import { loginService } from '@/services/userService'
+import getTimeService from '@/utils/time'
+
 // 创建路由实例
 const router = useRouter()
-// 建立表单数据
+
+// 建立默认表单数据（空数据）
 const defauteForm = ref({
   username: '',
   password: '',
 })
+// 创建用户登录表单 + 建立模板引用 --- 为了进行表单规则验证
 const userInfoForm = ref({})
 userInfoForm.value = { ...defauteForm.value }
-// 建立模板引用
 const formRef = ref(null)
-// 建立检验规则
+
+// 建立表单检验规则
 const rules = {
   username: [
     { required: true, message: '请输入用户名称', trigger: 'change' },
@@ -36,34 +33,34 @@ const rules = {
     { min: 5, max: 15, message: '密码长度需要在 5 到 15 之间', trigger: ['change', 'blur'] },
   ],
 }
+
 // 设置loading加载状态
 const loading = ref(false)
-// 进行验证
-// 提交表单
+
+// 开始验证 + 提交表单
 const onSubmit = async () => {
   // 进行预验证 --- 检验已经写的规则
   await formRef.value.validate()
   // 开始加载
   loading.value = true
-  // 提交后台验证
-  const res = await userLoginService(userInfoForm.value)
-  // console.log(res)
-  // console.log(res.data.data)
-  // 这是我的理解写的，这一段其实我也不理解那些不写判断的 --- 因为老师没写判断
-  if (res.data.code === 200) {
-    // 存储 Token
-    userStore.setToken(res.data.data)
+
+  try {
+    const res = await loginService(userInfoForm.value)
+    // console.log(res)
+    // 路由跳转
+    router.replace('/')
     // 提示 --- 登陆成功
-    // const tempTime = getTimeService()
     ElNotification.success({
       title: `Hi,${getTimeService()}好啊`,
       dangerouslyUseHTMLString: true,
-      message: '欢迎回来',
+      message: res,
     })
-    // 路由跳转
-    router.replace('/')
+  } catch (error) {
+    // console.log(error)
+    ElMessage.error(error)
   }
-  // 清空userInfoForm
+
+  // 清空userInfoForm + 按钮加载效果停止
   userInfoForm.value = { ...defauteForm.value }
   loading.value = false
 }

@@ -7,9 +7,8 @@ export const constantRoute = [
     path: '/',
     component: () => import('@/views/framework/layout/index.vue'),
     meta: {
-      title: '首页架子',
+      title: '',
       show: true, // 决定该路由导航是否显示 --- true显示；false隐藏
-      icon: 'User',
     },
     redirect: '/home',
     // layout首页具有很多二级路由 --- 这里进行test测试

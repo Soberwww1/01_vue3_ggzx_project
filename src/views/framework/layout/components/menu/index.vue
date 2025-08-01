@@ -1,8 +1,7 @@
 <script setup>
 // 导入路由组件
 import { useRouter } from 'vue-router'
-// 导入仓库组件
-import { useLayOutSettingStore } from '@/stores/index'
+import { layoutSettingStoreFn } from '@/utils/_store'
 
 // 自命名 --- 梳理结构时更清晰
 defineOptions({
@@ -13,13 +12,11 @@ defineProps({
     type: Array,
   },
 })
-// 创建仓库实例
-const layoutSettingStore = useLayOutSettingStore()
+
 // 创建路由实例
 const router = useRouter()
 // 实现导航路由跳转
 const handleSkip = (path) => {
-  // console.log(path)
   router.push(path)
 }
 </script>
@@ -30,7 +27,7 @@ const handleSkip = (path) => {
     我们在这里使用嵌套路由的思路是 --- 先传入一个menulist列表给layoutMenu组件并循环这个数组中元素，
     加入数组中元素还是一个数组，那么就会在el-sub-menu中继续家伙家伙导入layoutMenu，
     并且将每次v-for遍历的元素item的item.children作为新的遍历数组传给新的layoutMenu组件
-    -->
+  -->
   <div class="menu" v-for="item in menulist" :key="item.path">
     <!-- 单级 -->
     <el-menu-item
@@ -59,7 +56,7 @@ const handleSkip = (path) => {
         <el-icon :size="20"><component :is="item.meta.icon" /></el-icon>
         <span>{{ item.meta.title }}</span>
       </template>
-      <el-menu-item-group :class="{ foldmenu: layoutSettingStore.isCollopse }">
+      <el-menu-item-group :class="{ foldmenu: layoutSettingStoreFn().isCollopse }">
         <!-- 路由迭代 -->
         <layoutMenu :menulist="item.children"></layoutMenu>
       </el-menu-item-group>

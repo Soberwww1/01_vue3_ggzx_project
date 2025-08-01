@@ -1,4 +1,5 @@
 <script setup>
+// 导入组件
 import breadCrumb from '@/views/framework/layout/components/tobbar/breadcrumb/index.vue'
 import tobbarRight from '@/views/framework/layout/components/tobbar/setting/index.vue'
 
@@ -7,12 +8,13 @@ defineOptions({
   name: 'layoutTobbar',
 })
 </script>
+
 <template>
   <div class="tobbar-container">
     <!-- 左侧面包屑 -->
-    <breadCrumb></breadCrumb>
+    <breadCrumb />
     <!-- 右边用户设置 -->
-    <tobbarRight></tobbarRight>
+    <tobbarRight />
   </div>
 </template>
 

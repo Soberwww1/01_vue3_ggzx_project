@@ -3,6 +3,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import pinia from './stores/index'
 import router from './router/index'
+// 引入路由鉴权
+import '@/router/permisstion'
+
 // 导入SVG图标插件
 import 'virtual:svg-icons-register'
 
@@ -14,6 +17,7 @@ app.use(pinia)
 app.use(router)
 // 初始化自定义插件 --- globalComponent
 app.use(globalComponent)
+//
 
 // 全局注册组件
 app.mount('#app')

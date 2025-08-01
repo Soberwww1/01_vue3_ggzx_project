@@ -1,4 +1,4 @@
-// 封装函数 --- 进行时间提醒
+// 工具函数 --- 进行时间提醒
 const getTimeService = () => {
   let message = ''
   // 获取当前小时数

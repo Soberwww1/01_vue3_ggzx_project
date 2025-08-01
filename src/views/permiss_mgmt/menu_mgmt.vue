@@ -5,10 +5,11 @@
     <p>Hello GGZX</p>
   </div>
 </template>
+
 <style lang="less" scoped>
 .menu-container {
   width: 100%;
-  height: 500px;
+  height: 80%;
   background-color: red;
   margin: 0 auto;
 }

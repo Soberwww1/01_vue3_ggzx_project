@@ -1,4 +1,4 @@
-// 控制左侧导航开关
+// layout设置setting组件仓库 --- 包括：控制左侧导航开关
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 

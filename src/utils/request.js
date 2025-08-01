@@ -1,25 +1,22 @@
 import axios from 'axios'
-// 导入 pinia 仓库
-import { useUserStore } from '@/stores/index'
-// 导入elmessage提示
+// 导入elementplus提示组件、自定义仓库工具函数
 import { ElMessage } from 'element-plus'
+import { userStoreFn } from '@/utils/_store'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000,
-  // 先不配置请求头 --- 配置之后会有跨域问题
-  // headers: {'X-Custom-Header': 'foobar'}
+  headers: { 'X-Custom-Header': 'foobar' },
 })
 
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    // 先判断pinia仓库中有无 Token
-    const userStore = useUserStore()
+
     // 如果具有token，就是登录状态 --- 给request请求头加上token
-    if (userStore.token) {
-      config.headers.Authorization = userStore.token
+    if (userStoreFn().token) {
+      config.headers.token = userStoreFn().token
     }
     return config
   },
@@ -33,14 +30,13 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function (response) {
     // 2xx 范围内的状态码都会触发该函数。 --- 这里200指的是status200
-
-    // 这个response.code200 是指请求成功，但是用户名和用户密码也要正确，
-    // 因为不正确的用户名和密码也会正确响应status200但是response.code不会是200
-    if (response.data.code === 200) {
-      return response
+    /*
+      这个response.code200 是指请求成功，但是用户名和用户密码也要正确，
+      因为不正确的用户名和密码也会正确响应status200但是response.code不会是200
+    */
+    if (response.data.code !== 200) {
+      return Promise.reject(response.data.message)
     }
-    ElMessage.error(response.data.message)
-    // 对响应数据做点什么
     return response
   },
   function (error) {

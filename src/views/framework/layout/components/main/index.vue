@@ -4,7 +4,9 @@ defineOptions({
   name: 'layoutMain',
 })
 </script>
+
 <template>
+  <!-- 添加不同路由切换时的过渡效果 -->
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <component :is="Component" />
