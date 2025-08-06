@@ -2,6 +2,7 @@
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import Card from '@/components/Card/index.vue'
 import Dialog from '@/components/Dialog/index.vue'
+import Category from '@/components/Category/index.vue'
 // 导入全局icon图标
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -10,6 +11,7 @@ const allGlobalCompoents = {
   SvgIcon,
   Card,
   Dialog,
+  Category,
 }
 
 // 自定义全局注册插件 --- 对外暴露一个对象 --- 对象中引入所有Components组件 ---

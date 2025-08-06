@@ -11,7 +11,7 @@ defineProps({
     required: true,
   },
 })
-const emits = defineEmits(['onSucess', 'onClose'])
+const emit = defineEmits(['onSucess', 'onClose'])
 
 // 控制Dialog对话框是否展示
 const isShow = ref(false)
@@ -93,7 +93,7 @@ const onComfirm = async () => {
     }
     isShow.value = false
     // 如果是修改品牌 --- 就传递当前品牌的id；不是就发送空
-    emits('onSucess', form.value?.id)
+    emit('onSucess', form.value?.id)
   } catch (error) {
     ElMessage.error(error)
   }
@@ -123,7 +123,7 @@ defineExpose({
 
 <template>
   <!-- 关闭Dialog 对话框后的回调 -->
-  <el-dialog v-model="isShow" :title="title" @close="emits('onClose', '添加品牌')" width="500">
+  <el-dialog v-model="isShow" :title="title" @close="emit('onClose', '添加品牌')" width="500">
     <!-- 表单 -->
     <el-form :model="form" ref="formRef" :rules="rules">
       <el-form-item label="品牌名称" label-width="100px" prop="tmName">
@@ -157,7 +157,18 @@ defineExpose({
   </el-dialog>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.dialog-footer {
+  padding: 20px 0 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  :deep(.el-button) {
+    margin-left: 0; // 覆盖默认的左边距
+  }
+}
+</style>
 <style>
 .avatar-uploader .el-upload {
   border: 1.5px dashed var(--el-border-color);

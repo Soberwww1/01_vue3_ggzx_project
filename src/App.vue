@@ -9,12 +9,4 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
   </el-config-provider>
 </template>
 
-<style lang="less" scoped>
-.test-container {
-  width: 400px;
-  height: 800px;
-  margin: 100px auto;
-  background-color: pink;
-  padding: 10px 20px;
-}
-</style>
+<style lang="less" scoped />

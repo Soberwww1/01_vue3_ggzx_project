@@ -3,5 +3,4 @@ export default {
   title: '后台管理系统模板', // 项目的标题
   logo: 'Ciberpunk', // 项目logo设置
   logoHidden: true, // logo组件是否隐藏设置
-  // logoHidden: false,    // logo组件是否隐藏设置
 }

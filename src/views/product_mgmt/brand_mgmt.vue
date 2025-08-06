@@ -57,25 +57,21 @@ const handleEdit = (obj) => {
   title.value = '修改品牌'
   DialogRef.value.exposeFn(obj)
 }
-const handleDelete = (obj) => {
+const handleDelete = async (obj) => {
   // 删除品牌
-  // console.log(obj)
-  ElMessageBox.confirm('您确定该品牌删除吗?', '温馨提示', {
+  await ElMessageBox.confirm('您确定该品牌删除吗?', '温馨提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning',
   })
-    .then(async () => {
-      try {
-        await reqDeleteTrademarkList(obj.id)
-        ElMessage.success('删除成功')
-      } catch (error) {
-        ElMessage.error(error)
-      }
-      // 删完了重新请求获取数据渲染
-      getProductList(parmasobj.value)
-    })
-    .catch(() => {})
+  try {
+    await reqDeleteTrademarkList(obj.id)
+    ElMessage.success('删除成功')
+  } catch (error) {
+    ElMessage.error(error)
+  }
+  // 删完了重新请求获取数据渲染
+  getProductList(parmasobj.value)
 }
 // 获取子元素消息 --- 更新品牌 or 添加品牌成功后的回调
 const handleSucess = (id) => {
@@ -198,7 +194,6 @@ getProductList(parmasobj.value)
 }
 
 // 分页框样式
-
 .el-pagination {
   margin-top: 20px;
   justify-content: center;
