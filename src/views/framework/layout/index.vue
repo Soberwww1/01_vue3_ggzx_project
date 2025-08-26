@@ -66,8 +66,8 @@ const handleClose = () => {}
         <layoutTobbar></layoutTobbar>
       </el-header>
       <!-- 架子主体 --- main二级路由跳转页面 -->
-      <!-- <el-main style="background-color: pink"> -->
-      <el-main>
+      <el-main style="background-color: pink">
+        <!-- <el-main> -->
         <!-- 在这里插入自行封装的Main组件（说白了里面还是router-view） -->
         <layoutMain></layoutMain>
       </el-main>
@@ -107,5 +107,10 @@ const handleClose = () => {}
   width: @base-menu-min-width;
   // 增加点渐变
   transition: all 0.3s ease;
+}
+
+// 主题头部分界线
+.el-header {
+  border-bottom: 1px solid rgb(193, 193, 193);
 }
 </style>

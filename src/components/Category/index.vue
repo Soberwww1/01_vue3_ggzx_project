@@ -33,10 +33,6 @@ const handleCategory2 = async () => {
   const res = await reqGetCategory3(categoryFn().c2Id)
   categoryFn().c3list = res.data.data
 }
-// 如果第三个选择框也被更改，那么就可以显示所有属性值
-// const handleCategory3 = () => {
-//     // emit('onSubmit')
-// }
 
 // 属性页进行渲染后进行数据请求
 onMounted(() => {

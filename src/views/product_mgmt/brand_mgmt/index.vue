@@ -14,7 +14,7 @@ const parmasobj = ref({
   limit: 5, // 当前页需要的数据条数
 })
 // 每页显示条目个数数组
-const pageSizes = ref([2, 5, 10, 15])
+const pageSizes = ref([1, 2, 5, 10, 15])
 // 条目总数
 const total = ref(0)
 
@@ -27,6 +27,7 @@ const getProductList = async (obj) => {
   try {
     const res = await reqGetTrademarkList(obj)
     tableData.value = res.data.data.records
+    // console.log(res.data.data.records)
     total.value = res.data.data.total
   } catch (error) {
     ElMessage.warning(error)
@@ -135,7 +136,7 @@ getProductList(parmasobj.value)
           </el-table-column>
           <!-- 无数据 -->
           <template #empty>
-            <el-empty description="No Data" />
+            <el-empty description="找不到数据" />
           </template>
         </el-table>
 

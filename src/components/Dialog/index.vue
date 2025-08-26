@@ -57,8 +57,17 @@ const beforeAvatarUpload = (rawFile) => {
 // 文件上传成功后返回函数
 const handleAvatarSuccess = (response) => {
   if (response.code === 200) {
-    const tempPath = response.data.replace(new RegExp(`^${import.meta.env.VITE_APP_BASE_API}`), '')
-    form.value.logoUrl = `${import.meta.env.VITE_SERVE}` + `${tempPath}`
+    // const tempPath = response.data.replace(new RegExp(`^${import.meta.env.VITE_APP_BASE_API}`), '')
+    // form.value.logoUrl = `${import.meta.env.VITE_SERVE}` + `${tempPath}`
+    /*
+      上述代码是我之前将成功上传后的图片路径更改的代码，因为从后台数据库中获取的图片数据不是完整数据
+      而是类似于：'/api/static/img/sph/20241217/oppo4.jpeg' 这中形式，然后发现
+      http://localhost:5173/api/static/img/sph/20250811/3-300x300.jpg
+      http://127.0.0.1:10086/static/img/sph/20250801/3-300x300.jpg
+      都可以访问，那我还何必更改图片路径呢
+    */
+    form.value.logoUrl = response.data
+    // console.log(response.data)
     return
   }
   ElMessage.warning(response.message)
@@ -132,7 +141,7 @@ defineExpose({
       <el-form-item label="品牌LOGO" label-width="100px" prop="logoUrl">
         <el-upload
           class="avatar-uploader"
-          action="http://127.0.0.1:10086/admin/product/fileUpload"
+          action="/api/admin/product/fileUpload"
           :headers="headers"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"

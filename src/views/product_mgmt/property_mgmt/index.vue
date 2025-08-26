@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
           </el-table-column>
           <!-- 无数据 -->
           <template #empty>
-            <el-empty description="No Data" />
+            <el-empty description="找不到数据" />
           </template>
         </el-table>
 

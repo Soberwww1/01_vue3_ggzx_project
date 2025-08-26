@@ -63,7 +63,7 @@ export const constantRoute = [
       {
         name: 'user',
         path: '/permiss/user',
-        component: () => import('@/views/permiss_mgmt/user_mgmt.vue'),
+        component: () => import('@/views/permiss_mgmt/user_mgmt/index.vue'),
         meta: {
           title: '用户管理',
           show: true,
@@ -73,7 +73,7 @@ export const constantRoute = [
       {
         name: 'role',
         path: '/permiss/role',
-        component: () => import('@/views/permiss_mgmt/role_mgmt.vue'),
+        component: () => import('@/views/permiss_mgmt/role_mgmt/index.vue'),
         meta: {
           title: '角色管理',
           show: true,
@@ -83,7 +83,7 @@ export const constantRoute = [
       {
         name: 'menu',
         path: '/permiss/menu',
-        component: () => import('@/views/permiss_mgmt/menu_mgmt.vue'),
+        component: () => import('@/views/permiss_mgmt/menu_mgmt/index.vue'),
         meta: {
           title: '菜单管理',
           show: true,
@@ -108,7 +108,7 @@ export const constantRoute = [
       {
         name: 'brand',
         path: '/product/brand',
-        component: () => import('@/views/product_mgmt/brand_mgmt.vue'),
+        component: () => import('@/views/product_mgmt/brand_mgmt/index.vue'),
         meta: {
           title: '品牌管理',
           show: true,
@@ -118,7 +118,7 @@ export const constantRoute = [
       {
         name: 'property',
         path: '/product/property',
-        component: () => import('@/views/product_mgmt/property_mgmt.vue'),
+        component: () => import('@/views/product_mgmt/property_mgmt/index.vue'),
         meta: {
           title: '属性管理',
           show: true,
@@ -128,7 +128,7 @@ export const constantRoute = [
       {
         name: 'spu',
         path: '/product/spu',
-        component: () => import('@/views/product_mgmt/spu_mgmt.vue'),
+        component: () => import('@/views/product_mgmt/spu_mgmt/index.vue'),
         meta: {
           title: 'SPU管理',
           show: true,
@@ -138,7 +138,7 @@ export const constantRoute = [
       {
         name: 'sku',
         path: '/product/sku',
-        component: () => import('@/views/product_mgmt/sku_mgmt.vue'),
+        component: () => import('@/views/product_mgmt/sku_mgmt/index.vue'),
         meta: {
           title: 'SKU管理',
           show: true,
