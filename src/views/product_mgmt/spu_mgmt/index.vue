@@ -1,10 +1,12 @@
 <script setup>
-import { ref, watch, onBeforeUnmount } from 'vue'
+import { ref, watch, onBeforeUnmount, markRaw } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { Delete } from '@element-plus/icons-vue'
 
 // 导入pinia仓库工具函数 + 导入数据请求API
 import { categoryFn } from '@/utils/_store'
 import { reqGetSPUList, reqDelSPUInfo } from '@/api/product/spu'
+import { reqGetSkuList } from '@/api/product/sku'
 
 // 导入两个组件 --- 添加or修改SPU / 添加SKU
 import SkuForm from './SkuForm.vue'
@@ -33,12 +35,17 @@ const parmasobj = ref({
 const total = ref(0)
 const pageSizes = ref([1, 2, 5, 10, 15])
 
-//  测试表格数据
+//  SPU属性表格展示数据
 const tableData = ref([])
 
 // 获取两个组件SpuForm & SkuForm 的对外暴露函数，并传递数据
 const SpuFormRef = ref(null)
 const SkuFormRef = ref(null)
+
+// 控制展示sku弹框开关
+const dialogVisible = ref(false)
+// 弹框中特定SPU属性对应的SKU表格数据
+const SKUtableData = ref([])
 
 // 获取三级分类对应的SPU表格数据 + 分页器数据
 const getSPUList = async () => {
@@ -84,11 +91,19 @@ const handleSizeChange = (value) => {
   getSPUList()
 }
 
+// 添加SKU按钮 --- 展示 “添加SKU”属性框
+const addSku = (row) => {
+  // console.log(row)
+  scene.value = 2
+  isShow.value = false
+  // 传递给SKuForm组件数据
+  SkuFormRef.value.SKUExposeFn(row)
+}
 // 添加SPU按钮 --- 展示“添加SPU”属性框
 const addSpu = () => {
   scene.value = 1
   isShow.value = false
-  SpuFormRef.value.exposeFn({
+  SpuFormRef.value.SPUExponseFn({
     // 因为新增SPU也要在对应的C3ID中添加，如果不在父组件中带给子组件，默认C3ID就是0（我自己默认写的0）
     category3Id: categoryFn().c3Id,
   })
@@ -98,20 +113,32 @@ const updateSpu = (row) => {
   scene.value = 1
   isShow.value = false
   // 传递给SpuForm组件数据
-  SpuFormRef.value.exposeFn(row)
+  SpuFormRef.value.SPUExponseFn(row)
   // console.log(row)
+}
+// 查看某个SPU中所有SKU
+const toshowSKU = async (row) => {
+  try {
+    // 获取数据成功就打开遮罩弹框 --- 并赋值表格数据
+    const res = await reqGetSkuList(row.id)
+    dialogVisible.value = true
+    SKUtableData.value = res.data.data
+  } catch {
+    ElMessage.error('SKU信息获取失败')
+  }
 }
 // 删除SPU按钮
 const deleteSpu = (row) => {
   // console.log(row)
-  ElMessageBox.confirm('您确认删除吗？', 'Warning', {
+  ElMessageBox.confirm(`您确认删除${row.spuName}吗？`, '温馨提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
+    icon: markRaw(Delete),
   })
     .then(async () => {
       await reqDelSPUInfo(row.id)
-      // 删除后重新拉取后台数据
+      // 删除后重新拉取后台数据，并返回第一页
       parmasobj.value.page = 1
       getSPUList()
       ElMessage.success('删除成功')
@@ -168,10 +195,12 @@ onBeforeUnmount(() => {
           <el-table-column align="center" label="操作">
             <template #default="{ row, $index }">
               <!-- 添加sku属性按钮 -->
-              <el-button size="small" type="primary" icon="Plus" />
+              <el-button @click="addSku(row)" size="small" type="primary" icon="Plus" />
               <!-- 编辑spu属性按钮 -->
               <el-button @click="updateSpu(row, $index)" size="small" type="warning" icon="Edit" />
-              <el-button size="small" type="success" icon="Position" />
+              <!-- 展示所属SPU对应的SKU按钮 -->
+              <el-button @click="toshowSKU(row)" size="small" type="success" icon="View" />
+              <!-- 删除SPU属性按钮 -->
               <el-button @click="deleteSpu(row, $index)" size="small" type="danger" icon="Delete" />
             </template>
           </el-table-column>
@@ -198,7 +227,21 @@ onBeforeUnmount(() => {
         <SpuForm v-show="scene === 1" ref="SpuFormRef" @changeScene="changeScene" />
 
         <!-- 新增SKU属性展示区 -->
-        <SkuForm v-show="scene === 2" ref="SkuFormRef" />
+        <SkuForm v-show="scene === 2" ref="SkuFormRef" @changeScene="changeScene" />
+
+        <!-- 弹框 --- 展示特定SPU的SKU数据 -->
+        <el-dialog v-model="dialogVisible" title="SKU列表">
+          <el-table :data="SKUtableData" border>
+            <el-table-column label="SKU名字" prop="skuName" align="center" />
+            <el-table-column label="SKU价格" prop="price" align="center" />
+            <el-table-column label="SKU重量" prop="weight" align="center" />
+            <el-table-column label="SKU图片" align="center">
+              <template #default="{ row }">
+                <el-image style="width: 100px; height: 100px" :src="row.skuDefaultImg" fit="fill" />
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-dialog>
       </template>
     </CustomCard>
   </div>
@@ -208,7 +251,6 @@ onBeforeUnmount(() => {
 .spu-container {
   width: 100%;
   height: 100%;
-  // background-color: tomato;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

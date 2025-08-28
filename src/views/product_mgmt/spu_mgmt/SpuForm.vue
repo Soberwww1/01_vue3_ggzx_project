@@ -210,7 +210,7 @@ const handelSave = async () => {
 }
 
 // 对外暴露的方法
-const exposeFn = (obj) => {
+const SPUExponseFn = (obj) => {
   formSpu.value = obj
   // 获取所有SPU品牌选择框列表数据
   getAllBrand()
@@ -232,7 +232,7 @@ const exposeFn = (obj) => {
 }
 
 defineExpose({
-  exposeFn,
+  SPUExponseFn,
 })
 </script>
 
