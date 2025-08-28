@@ -6,7 +6,7 @@ import { Delete } from '@element-plus/icons-vue'
 // 导入pinia仓库工具函数 + 导入数据请求API
 import { categoryFn } from '@/utils/_store'
 import { reqGetSPUList, reqDelSPUInfo } from '@/api/product/spu'
-import { reqGetSkuList } from '@/api/product/sku'
+import { reqGetSkuListBySpuId } from '@/api/product/sku'
 
 // 导入两个组件 --- 添加or修改SPU / 添加SKU
 import SkuForm from './SkuForm.vue'
@@ -120,7 +120,7 @@ const updateSpu = (row) => {
 const toshowSKU = async (row) => {
   try {
     // 获取数据成功就打开遮罩弹框 --- 并赋值表格数据
-    const res = await reqGetSkuList(row.id)
+    const res = await reqGetSkuListBySpuId(row.id)
     dialogVisible.value = true
     SKUtableData.value = res.data.data
   } catch {
