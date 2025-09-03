@@ -212,6 +212,7 @@ onBeforeUnmount(() => {
           :border="true"
           v-loading="loading"
           show-overflow-tooltip
+          class="card-table"
         >
           <el-table-column type="index" align="center" label="序号" width="110" />
           <el-table-column align="center" label="属性名称" width="200" prop="attrName" />
@@ -246,8 +247,8 @@ onBeforeUnmount(() => {
           </template>
         </el-table>
 
-        <!-- 属性修改增加框 --- 主体表单 + 表格 -->
-        <el-form v-else>
+        <!-- 属性值修改增加框 --- 主体表单 + 表格 -->
+        <el-form v-else class="card-form">
           <el-form-item>
             <!-- 根据需要 添加/修改的 属性名输入框里是否有值 --- 来控制 “添加属性值”按钮 -->
             <el-button
@@ -320,6 +321,46 @@ onBeforeUnmount(() => {
 
   .property-category {
     margin-bottom: 50px;
+  }
+
+  // 属性卡片
+  .property-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .card-table,
+    .card-form {
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      flex: 1;
+
+      // 修改这里，添加滚动条样式
+      overflow-y: auto;
+
+      // 添加内边距，防止内容贴边
+      padding: 10px;
+
+      // 美化滚动条样式（可选）
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #dcdfe6;
+        border-radius: 3px;
+      }
+      &::-webkit-scrollbar-track {
+        background: #f5f7fa;
+      }
+    }
+
+    .card-table {
+      :deep(.el-table__body-wrapper) {
+        overflow-y: auto;
+      }
+    }
   }
 }
 </style>

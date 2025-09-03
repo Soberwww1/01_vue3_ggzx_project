@@ -72,7 +72,7 @@ const handleClose = () => {}
         <layoutMain></layoutMain>
       </el-main>
       <!-- 底部 -->
-      <el-footer style="background-color: skyblue">footer</el-footer>
+      <el-footer>后台管理系统😁😁😁 ©2025 Created by 吴腾宗</el-footer>
     </el-container>
   </el-container>
 </template>
