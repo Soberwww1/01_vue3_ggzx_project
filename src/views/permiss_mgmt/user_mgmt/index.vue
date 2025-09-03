@@ -1,15 +1,19 @@
 <script setup>
 import { ref } from 'vue'
-// 导入数据请求API：获取用户数据 + 新增用户数据 + 更新用户数据 + 删除用户数据
-import { reqGetUserList, reqDelUser } from '@/api/permiss/user'
+// 导入数据请求API：获取用户数据 + 删除用户数据 + 批量删除用户数据
+import { reqGetUserList, reqDelUser, reqDelUserList } from '@/api/permiss/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import drawerEdit from './drawerEdit/index.vue'
 
 // 获取搜索框数据
 const searchInput = ref('')
 
+// 用户表格实例
+const tableRef = ref(null)
 // 用户数据表格
 const tableData = ref([])
+// 多选框中已经被选中的ID数组
+const selectIdArr = ref([])
 
 // 分页器数据
 // 当前页数
@@ -31,13 +35,14 @@ const drawerTitle = ref('')
 const scene = ref(0)
 
 // 获取用户数据
-const getUserList = async (username) => {
-  username = searchInput.value
+const getUserList = async (page = 1) => {
+  // 收集当前页码
+  currentPage.value = page
   try {
     const res = await reqGetUserList({
-      page: currentPage.value,
+      page,
       limit: pageSize.value,
-      username,
+      username: searchInput.value,
     })
     // console.log(res)
     const { records } = res.data.data
@@ -45,19 +50,13 @@ const getUserList = async (username) => {
     tableData.value = records
     total.value = res.data.data.total
   } catch {
-    ElMessage.error(username ? '数据搜索失败' : '数据获取失败')
+    ElMessage.error('数据获取失败')
   }
 }
 
 // 搜索框操作
 // 搜索框继续搜索
 const handleSearch = async () => {
-  // const res = await reqGetUserList({
-  //   page: currentPage.value,
-  //   limit: pageSize.value,
-  //   username: searchInput.value
-  // })
-  // console.log(res)
   getUserList()
 }
 // 点击重置按钮进行页面刷新
@@ -92,7 +91,7 @@ const handleAssign = (row) => {
 }
 // 删除角色
 const handleDel = (row) => {
-  ElMessageBox.confirm('您确认删除该角色吗？', '温馨提示', {
+  ElMessageBox.confirm('您确认删除该用户吗？', '温馨提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     type: 'warning',
@@ -100,8 +99,6 @@ const handleDel = (row) => {
     .then(async () => {
       try {
         await reqDelUser(Number(row.id))
-        // const res = await reqDelUser(userId)
-        // console.log(res)
         ElMessage.success('删除成功')
         getUserList()
       } catch {
@@ -110,7 +107,28 @@ const handleDel = (row) => {
     })
     .catch(() => {})
 }
+// 点击复选框 --- 获取批量删除用户ID列表
+const handleSelectChange = (val) => {
+  selectIdArr.value = val.map((item) => Number(item.id))
+}
 // 批量删除角色
+const handleDelList = () => {
+  ElMessageBox.confirm('您确认删除这些用户吗？', '温馨提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(async () => {
+      try {
+        await reqDelUserList(selectIdArr.value)
+        ElMessage.success('删除成功')
+        getUserList()
+      } catch {
+        ElMessage.error('批量删除失败')
+      }
+    })
+    .catch(() => {})
+}
 
 // 接受抽屉返回数据 --- 控制抽屉遮罩打开 or 关闭
 const changeDrawer = (obj) => {
@@ -125,17 +143,11 @@ const changeDrawer = (obj) => {
   }
 }
 
-// 分页器操作
-// 操控每页显示多少条数
+// 分页器操作 --- 操控每页显示多少条数
 const handleSizeChange = (value) => {
   pageSize.value = value
   // 当当前页面的品牌显示数更改后，回到第一页
   currentPage.value = 1
-  getUserList()
-}
-// 操控当前页
-const handleCurrentChange = (value) => {
-  currentPage.value = value
   getUserList()
 }
 
@@ -165,12 +177,19 @@ getUserList()
       <!-- 主体标题 -->
       <template #head-button>
         <el-button type="primary" icon="Plus" @click="handelAdd">添加角色</el-button>
-        <el-button type="danger">批量删除</el-button>
+        <el-button
+          type="danger"
+          icon="Delete"
+          @click="handleDelList"
+          :disabled="selectIdArr.length > 0 ? false : true"
+        >
+          批量删除
+        </el-button>
       </template>
       <!-- 主体 数据表格 + 分页器 -->
       <template #content>
         <!-- 数据表格 -->
-        <el-table :data="tableData" border>
+        <el-table ref="tableRef" :data="tableData" @selection-change="handleSelectChange" border>
           <el-table-column type="selection" width="55" align="center" />
           <el-table-column type="index" label="#" align="center" />
           <el-table-column label="id" prop="id" align="center" />
@@ -207,7 +226,7 @@ getUserList()
             layout="prev, pager, next, jumper, -> , sizes, total"
             :total="total"
             @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
+            @current-change="getUserList"
           />
         </div>
       </template>
@@ -227,7 +246,6 @@ getUserList()
 .user-container {
   width: 100%;
   height: 80%;
-  background-color: aqua;
   .el-card {
     margin-bottom: 20px;
     .head-card {

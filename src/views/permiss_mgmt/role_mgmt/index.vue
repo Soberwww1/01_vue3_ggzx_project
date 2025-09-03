@@ -1,5 +1,3 @@
 <template>
-  <h1>俺是角色管理页面</h1>
+  <h5>这是用户管理</h5>
 </template>
-
-<style lang="less" scoped></style>

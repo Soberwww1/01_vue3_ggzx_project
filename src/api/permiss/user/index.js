@@ -17,9 +17,15 @@ export const reqAddUser = (obj) => {
 export const reqUpdateUser = (obj) => {
   return request.put('/admin/acl/user/update', obj)
 }
-// 删除用户
+// 删除单个用户
 export const reqDelUser = (userId) => {
   return request.delete(`/admin/acl/user/remove/` + userId)
+}
+// 批量删除用户
+export const reqDelUserList = (IdArr) => {
+  return request.delete('/admin/acl/user/batchRemove', {
+    data: IdArr,
+  })
 }
 
 // 获取特定ID下用户的角色
