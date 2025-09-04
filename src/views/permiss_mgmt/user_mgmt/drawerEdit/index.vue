@@ -11,7 +11,7 @@ defineProps({
     type: String,
   },
 })
-const emit = defineEmits(['changeDrawer'])
+const emit = defineEmits(['drawerChange'])
 
 // 控制添加角色 、编辑角色、 分配角色 三个抽屉的开关
 // 添加角色 --- 0
@@ -120,7 +120,7 @@ const confirmClick = async () => {
     }
 
     // 关闭遮罩
-    emit('changeDrawer', { flag: false, isUpdate: true, updateFlag: isScene.value })
+    emit('drawerChange', { flag: false, isUpdate: true, updateFlag: isScene.value })
   } catch {
     switch (isScene.value) {
       case 0:
@@ -138,7 +138,7 @@ const confirmClick = async () => {
 // 取消按钮
 const cancelClick = () => {
   // 关闭遮罩
-  emit('changeDrawer', { flag: false, isUpdate: false })
+  emit('drawerChange', { flag: false, isUpdate: false })
 }
 
 // 还是需要向外暴露一个方法
@@ -158,8 +158,6 @@ const drawerExponseFn = async (row, scene) => {
           data: { allRolesList, assignRoles },
         },
       } = await reqGetUserRoles(row.id)
-      // console.log(allRolesList)
-      // console.log(assignRoles)
       allRoles.value = allRolesList
       checkedRoles.value = assignRoles
     } catch (error) {
@@ -174,7 +172,7 @@ defineExpose({
 </script>
 
 <template>
-  <el-drawer :model-value="isDrawer" @update:model-value="emit('changeDrawer', false)" size="40%">
+  <el-drawer :model-value="isDrawer" @update:model-value="emit('drawerChange', false)" size="40%">
     <template #header>
       <h4>{{ drawerTitle }}</h4>
     </template>
@@ -225,7 +223,5 @@ defineExpose({
 <style lang="less" scoped>
 .role-list {
   width: 100%;
-  // height: 500px;
-  // background-color: skyblue;
 }
 </style>

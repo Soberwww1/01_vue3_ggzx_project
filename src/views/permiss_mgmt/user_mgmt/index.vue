@@ -131,7 +131,7 @@ const handleDelList = () => {
 }
 
 // 接受抽屉返回数据 --- 控制抽屉遮罩打开 or 关闭
-const changeDrawer = (obj) => {
+const drawerChange = (obj) => {
   // 关闭遮罩
   isDrawer.value = obj.flag
   // 判断主页面是否需要刷新
@@ -193,11 +193,41 @@ getUserList()
           <el-table-column type="selection" width="55" align="center" />
           <el-table-column type="index" label="#" align="center" />
           <el-table-column label="id" prop="id" align="center" />
-          <el-table-column label="用户名字" show-overflow-tooltip prop="username" />
-          <el-table-column label="用户名称" show-overflow-tooltip prop="name" />
-          <el-table-column label="用户角色" show-overflow-tooltip prop="roleName" />
-          <el-table-column label="创建时间" show-overflow-tooltip prop="createTime" />
-          <el-table-column label="更新时间" show-overflow-tooltip prop="updateTime" />
+          <el-table-column
+            label="用户名字"
+            show-overflow-tooltip
+            prop="username"
+            min-width="100"
+            align="center"
+          />
+          <el-table-column
+            label="用户名称"
+            show-overflow-tooltip
+            prop="name"
+            min-width="100"
+            align="center"
+          />
+          <el-table-column
+            label="用户角色"
+            show-overflow-tooltip
+            prop="roleName"
+            min-width="100"
+            align="center"
+          />
+          <el-table-column
+            label="创建时间"
+            show-overflow-tooltip
+            prop="createTime"
+            min-width="100"
+            align="center"
+          />
+          <el-table-column
+            label="更新时间"
+            show-overflow-tooltip
+            prop="updateTime"
+            min-width="100"
+            align="center"
+          />
           <el-table-column label="操作" fixed="right" min-width="270" align="center">
             <template #default="{ row }">
               <el-button size="small" type="success" icon="User" @click="handleAssign(row)">
@@ -237,7 +267,7 @@ getUserList()
       ref="drawerRef"
       :isDrawer="isDrawer"
       :drawerTitle="drawerTitle"
-      @changeDrawer="changeDrawer"
+      @drawerChange="drawerChange"
     />
   </div>
 </template>
