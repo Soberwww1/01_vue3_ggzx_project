@@ -16,3 +16,15 @@ export const reqUpdateRolePermission = ({ roleId, permissionId }) => {
     },
   })
 }
+
+// 获取当前菜单列表（所有菜单）
+export const reqGetAllRolePermission = () => request.get('/admin/acl/permission')
+
+// 新增菜单接口
+export const reqAddPermission = (obj) => request.post('/admin/acl/permission/save', obj)
+
+// 更新菜单接口
+export const reqUpdatePermission = (obj) => request.put('/admin/acl/permission/update', obj)
+
+// 删除菜单接口
+export const reqDelPermission = (id) => request.delete(`/admin/acl/permission/remove/${id}`)

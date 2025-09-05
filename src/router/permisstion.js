@@ -41,3 +41,9 @@ router.beforeEach(async (to) => {
 
 // 路由全局后置守卫 ---
 router.afterEach(() => {})
+
+/*
+ * 商品管理：product，品牌管理：Trademark
+ *
+ *
+ */

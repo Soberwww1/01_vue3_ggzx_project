@@ -32,7 +32,7 @@ export const logoutService = async () => {
 // 获取用户信息userInfo + 存储用户信息
 export const getUserInfoService = async () => {
   const res = await reqUserInfo()
-  // console.log(res)
+  console.log(res)
   // console.log(res.data.data)
   // 进行数据存储操作
   userStoreFn().setUserInfo(res.data.data)

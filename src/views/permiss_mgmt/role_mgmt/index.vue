@@ -107,7 +107,7 @@ const handleSizeChange = (value) => {
 }
 
 // 接受子组件消息
-// 弹框子组件
+// 接受弹框返回数据
 const dialogChange = (val) => {
   if (val.flag) {
     getRoleList()
@@ -135,7 +135,7 @@ getRoleList()
     <!-- 用户名搜索简单卡片 -->
     <el-card>
       <el-form class="head-card" :inline="true">
-        <el-form-item label="角色名称：">
+        <el-form-item label="职位名称：">
           <el-input placeholder="角色名称" v-model="searchInput" />
         </el-form-item>
         <el-form-item>
@@ -151,7 +151,7 @@ getRoleList()
     <CustomCard>
       <!-- 主体标题 -->
       <template #head-button>
-        <el-button type="primary" icon="Plus" @click="handelAdd">添加角色</el-button>
+        <el-button type="primary" icon="Plus" @click="handelAdd">添加职位</el-button>
       </template>
       <!-- 主体 数据表格 + 分页器 -->
       <template #content>

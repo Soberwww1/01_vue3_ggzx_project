@@ -54,7 +54,7 @@ defineExpose({
 
 <template>
   <el-dialog v-model="isScene" :title="titleFlag ? '添加职位' : '修改职位'" width="500">
-    <el-form :model="form">
+    <el-form :model="paramsobj">
       <el-form-item label="职位名称:">
         <el-input v-model="paramsobj.roleName" autocomplete="off" placeholder="请你输入职位名称" />
       </el-form-item>
