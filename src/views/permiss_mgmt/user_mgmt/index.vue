@@ -275,13 +275,92 @@ getUserList()
 <style lang="less" scoped>
 .user-container {
   width: 100%;
-  height: 80%;
+  height: 100%;
+  padding: 20px;
+
   .el-card {
     margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+    border: 2px solid @cyber-border;
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+
+    :deep(.el-card__body) {
+      background: transparent;
+    }
+
     .head-card {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .el-form-item__label {
+        color: @cyber-text-primary;
+        font-weight: 600;
+        font-family: 'Courier New', monospace;
+      }
+
+      .el-input {
+        :deep(.el-input__wrapper) {
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid @cyber-border;
+          border-radius: 8px;
+
+          &:hover {
+            border-color: @cyber-border-active;
+            box-shadow: 0 0 10px @cyber-shadow;
+          }
+
+          &.is-focus {
+            border-color: @cyber-border-active;
+            box-shadow: 0 0 15px @cyber-shadow-active;
+          }
+        }
+
+        :deep(.el-input__inner) {
+          color: @cyber-text-primary;
+
+          &::placeholder {
+            color: @cyber-text-muted;
+          }
+        }
+      }
+
+      .el-button {
+        border: 2px solid @cyber-border;
+        border-radius: 8px;
+        background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.05));
+        color: @cyber-text-primary;
+        font-weight: 600;
+        font-family: 'Courier New', monospace;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: @cyber-border-active;
+          background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.1));
+          box-shadow: 0 0 15px @cyber-shadow;
+          transform: translateY(-2px);
+        }
+
+        &.el-button--primary {
+          border-color: @cyber-primary;
+          background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+
+          &:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+          }
+        }
+
+        &.el-button--danger {
+          border-color: @cyber-error;
+          background: linear-gradient(45deg, rgba(255, 68, 68, 0.2), rgba(255, 68, 68, 0.1));
+          color: @cyber-error;
+
+          &:hover {
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+          }
+        }
+      }
     }
   }
 
@@ -289,6 +368,10 @@ getUserList()
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 46, 0.9) 100%);
+    border: 2px solid @cyber-border;
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
   }
 
   .el-table {
@@ -296,6 +379,45 @@ getUserList()
     display: flex;
     flex-direction: column;
     position: relative;
+    background: transparent;
+
+    :deep(.el-table__header) {
+      background: rgba(0, 0, 0, 0.5);
+
+      th {
+        background: rgba(0, 0, 0, 0.5);
+        border-bottom: 2px solid @cyber-border;
+        color: @cyber-text-primary;
+        font-weight: 600;
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+
+    :deep(.el-table__body) {
+      tr {
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid @cyber-border;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(0, 255, 255, 0.1);
+          box-shadow: 0 0 10px @cyber-shadow;
+        }
+
+        td {
+          color: @cyber-text-secondary;
+          border-bottom: 1px solid @cyber-border;
+          font-family: 'Courier New', monospace;
+        }
+      }
+    }
+
+    :deep(.el-table__empty-block) {
+      background: rgba(0, 0, 0, 0.3);
+      color: @cyber-text-muted;
+    }
   }
 
   // 表格样式
@@ -304,6 +426,25 @@ getUserList()
     overflow: hidden;
     :deep(.el-table__body-wrapper) {
       overflow-y: auto;
+
+      // 自定义滚动条
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: @cyber-border;
+        border-radius: 4px;
+
+        &:hover {
+          background: @cyber-border-active;
+        }
+      }
     }
   }
 
@@ -312,6 +453,40 @@ getUserList()
     margin-top: 20px;
     justify-content: center;
     padding: 0;
+
+    :deep(.el-pager) {
+      li {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid @cyber-border;
+        color: @cyber-text-primary;
+        font-family: 'Courier New', monospace;
+
+        &:hover {
+          background: rgba(0, 255, 255, 0.1);
+          border-color: @cyber-border-active;
+          box-shadow: 0 0 10px @cyber-shadow;
+        }
+
+        &.is-active {
+          background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.1));
+          border-color: @cyber-border-active;
+          box-shadow: 0 0 15px @cyber-shadow-active;
+        }
+      }
+    }
+
+    :deep(.btn-prev),
+    :deep(.btn-next) {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid @cyber-border;
+      color: @cyber-text-primary;
+
+      &:hover {
+        background: rgba(0, 255, 255, 0.1);
+        border-color: @cyber-border-active;
+        box-shadow: 0 0 10px @cyber-shadow;
+      }
+    }
   }
 }
 </style>

@@ -88,29 +88,200 @@ const handleClose = () => {}
   height: 100vh;
   // 使用全局变量调整左侧导航菜单的宽度 --- 更加自定义 & 复用
   width: @base-menu-width;
-  background: linear-gradient(104deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.1) 30%,
+    rgba(139, 92, 246, 0.1) 70%,
+    rgba(255, 0, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 2px solid @cyber-border;
   transition: all 0.3s ease;
+  position: relative;
+
+  // 添加玻璃质感边框效果
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      @cyber-primary,
+      @cyber-blue,
+      @cyber-purple,
+      @cyber-pink,
+      @cyber-primary
+    );
+    background-size: 400% 400%;
+    animation: border-flow 4s ease-in-out infinite;
+    opacity: 0.2;
+    z-index: -1;
+    border-radius: 0 15px 15px 0;
+  }
+
   // 导航滚动条
   .el-scrollbar {
-    // border-radius: 20px 20px 0 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(41, 48, 170, 0.5));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: @cyber-bg-glass;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 0;
+
     .el-menu {
       width: 100%;
       border: 0;
+      background: transparent;
+
+      // 菜单项样式
+      :deep(.el-menu-item) {
+        color: @cyber-text-secondary;
+        background: @cyber-bg-glass;
+        border-radius: 12px;
+        margin: 8px 15px;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        &:hover {
+          color: @cyber-text-primary;
+          background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(59, 130, 246, 0.1));
+          border-color: @cyber-border;
+          box-shadow: 0 8px 25px @cyber-shadow;
+          transform: translateX(5px);
+        }
+
+        &.is-active {
+          color: @cyber-text-primary;
+          background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(139, 92, 246, 0.2));
+          border-color: @cyber-border-active;
+          box-shadow: 0 8px 30px @cyber-shadow-active;
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, @cyber-primary, @cyber-blue);
+            border-radius: 0 2px 2px 0;
+          }
+        }
+      }
+
+      // 子菜单样式
+      :deep(.el-sub-menu) {
+        .el-sub-menu__title {
+          color: @cyber-text-secondary;
+          background: @cyber-bg-glass;
+          border-radius: 12px;
+          margin: 8px 15px;
+          transition: all 0.3s ease;
+          border: 1px solid transparent;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+
+          &:hover {
+            color: @cyber-text-primary;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(59, 130, 246, 0.1));
+            border-color: @cyber-border;
+            box-shadow: 0 8px 25px @cyber-shadow;
+            transform: translateX(5px);
+          }
+        }
+      }
     }
   }
 }
+
 & .fold {
   // 基本的左侧导航栏 打开 or 关闭
   width: @base-menu-min-width;
-  // 增加点渐变
   transition: all 0.3s ease;
 }
 
 // 主题头部分界线
 .el-header {
-  border-bottom: 1px solid rgb(193, 193, 193);
+  border-bottom: 2px solid @cyber-border;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, @cyber-primary, @cyber-blue, @cyber-purple, @cyber-pink);
+    background-size: 300% 300%;
+    animation: border-flow 3s ease-in-out infinite;
+    opacity: 0.1;
+    z-index: -1;
+  }
+}
+
+// 主内容区域
+.el-main {
+  background: transparent !important;
+  padding: 20px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// 底部
+.el-footer {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 255, 0.1) 0%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 2px solid @cyber-border;
+  color: @cyber-text-secondary;
+  text-align: center;
+  line-height: 60px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+// 边框流动动画
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>

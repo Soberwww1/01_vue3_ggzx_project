@@ -113,81 +113,248 @@ const onSubmit = async () => {
 .login-container {
   width: 100%;
   height: 100vh;
-  background: url(@/assets/images/background.jpg) no-repeat center / cover;
-  .el-form {
-    padding: 15px 15px 10px;
-    margin-top: 30vh;
-    background: url(@/assets/images/login_form.png) no-repeat center / cover;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(41, 48, 170, 0.5));
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    width: 80%;
-    border-radius: 30px;
-    .el-form-item {
-      padding: 10px 15px;
-      h1 {
-        height: 50px;
-        font-size: 40px;
-        background: linear-gradient(300deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
-      }
-      h2 {
-        font-size: 26px;
-        margin-top: -25px;
-        background: linear-gradient(162deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
-      }
+  background: linear-gradient(
+    135deg,
+    @cyber-bg-primary 0%,
+    @cyber-bg-secondary 30%,
+    @cyber-bg-tertiary 70%,
+    #1e1b4b 100%
+  );
+  position: relative;
+  overflow: hidden;
 
-      h1,
-      h2 {
-        font-weight: bolder;
+  // 添加明亮的动态背景效果
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+    background-size:
+      50px 50px,
+      50px 50px,
+      200px 200px,
+      200px 200px;
+    animation: grid-move 20s linear infinite;
+    opacity: 0.4;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    animation: pulse-glow 8s ease-in-out infinite;
+  }
+
+  .el-form {
+    padding: 40px;
+    margin-top: 20vh;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 0, 255, 0.1) 30%,
+      rgba(59, 130, 246, 0.1) 70%,
+      rgba(139, 92, 246, 0.1) 100%
+    );
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 2px solid @cyber-border;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 30px @cyber-shadow,
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    width: 420px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 10;
+
+    // 添加玻璃质感边框效果
+    &::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(
+        45deg,
+        @cyber-primary,
+        @cyber-blue,
+        @cyber-purple,
+        @cyber-pink,
+        @cyber-primary
+      );
+      background-size: 400% 400%;
+      border-radius: 20px;
+      animation: border-flow 4s ease-in-out infinite;
+      z-index: -1;
+      opacity: 0.6;
+    }
+    .el-form-item {
+      padding: 15px 0;
+
+      h1 {
+        height: 60px;
+        font-size: 38px;
+        font-weight: 800;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        background: linear-gradient(45deg, @cyber-primary, @cyber-blue, @cyber-purple, @cyber-pink);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px @cyber-shadow;
+        text-align: center;
+        margin: 0;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        color: @cyber-text-secondary;
+        text-align: center;
+        margin: -5px 0 25px 0;
+        letter-spacing: 0.5px;
+        opacity: 0.8;
       }
 
       .el-input {
-        height: 35px;
-        border-radius: 10px;
+        height: 45px;
+        border-radius: 8px;
         font-size: 16px;
         background-color: transparent;
+        margin: 10px 0;
       }
+
       .el-button {
-        color: white;
-        font-size: 20px;
+        color: @cyber-text-primary;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
         width: 100%;
-        padding: 5px 20px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 20px;
-        background-color: transparent;
+        height: 50px;
+        padding: 0;
+        border: 2px solid @cyber-border;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(59, 130, 246, 0.1));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s ease;
+        }
+
+        &:hover {
+          border-color: @cyber-border-active;
+          background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(139, 92, 246, 0.2));
+          box-shadow: 0 8px 25px @cyber-shadow-active;
+          transform: translateY(-3px);
+
+          &::before {
+            left: 100%;
+          }
+        }
+
+        &:active {
+          transform: translateY(-1px);
+        }
       }
-      .el-button:hover {
-        background-color: rgba(62, 57, 212, 0.486);
-        color: rgb(255, 0, 255);
-        font-weight: bolder;
-        background: linear-gradient(350deg, aqua, #39c5bb, blue, blueviolet, #ff65a3);
-        box-shadow: 0 10px 32px 0 rgba(212, 206, 206, 0.615);
-        border: 0;
-      }
+
       :deep(.el-input) {
-        --el-input-text-color: white;
-        --el-input-border: #1e2230;
-        --el-input-hover-border: rgba(255, 255, 255, 0.18);
-        // 未输入时input边框的颜色
-        --el-input-border-color: rgba(255, 255, 255, 0.18);
-        // input框边框角度
-        --el-input-border-radius: 30px;
-        // input背景颜色
-        --el-input-bg-color: transparent;
-        // input中icon颜色
-        --el-input-icon-color: white;
-        // input中placeholder颜色
-        --el-input-placeholder-color: white;
-        // 输入时input边框的颜色
-        --el-input-focus-border-color: white;
+        --el-input-text-color: @cyber-text-primary;
+        --el-input-border: @cyber-border;
+        --el-input-hover-border: @cyber-border-active;
+        --el-input-border-color: @cyber-border;
+        --el-input-border-radius: 12px;
+        --el-input-bg-color: @cyber-bg-glass;
+        --el-input-icon-color: @cyber-text-primary;
+        --el-input-placeholder-color: @cyber-text-muted;
+        --el-input-focus-border-color: @cyber-border-active;
         --el-input-width: 100%;
+
+        .el-input__wrapper {
+          background: @cyber-bg-glass;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          border: 1px solid @cyber-border;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: @cyber-border-active;
+            box-shadow: 0 0 15px @cyber-shadow;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(59, 130, 246, 0.05));
+          }
+
+          &.is-focus {
+            border-color: @cyber-border-active;
+            box-shadow: 0 0 20px @cyber-shadow-active;
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(139, 92, 246, 0.1));
+          }
+        }
       }
     }
+  }
+}
+
+// 动画效果
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 </style>

@@ -1,5 +1,40 @@
-// 这是一个 less样式 全局变量包
-@base-color: red;
+// 明亮赛博朋克主题全局变量包
+@base-color: #ff00ff;
+
+// 明亮赛博朋克主题色彩
+@cyber-primary: #ff00ff;      // 主色调 - 深粉色/洋红色
+@cyber-secondary: #00ffff;    // 辅助色 - 青色
+@cyber-accent: #ff0080;       // 强调色 - 深粉色
+@cyber-success: #00ff88;      // 成功色 - 青绿色
+@cyber-warning: #ffaa00;      // 警告色 - 橙色
+@cyber-error: #ff3366;        // 错误色 - 红色
+@cyber-purple: #8b5cf6;       // 紫色
+@cyber-blue: #3b82f6;         // 蓝色
+@cyber-pink: #ec4899;         // 粉色
+
+// 背景色彩 - 更明亮的渐变
+@cyber-bg-primary: #1a0b2e;   // 主背景 - 深紫色
+@cyber-bg-secondary: #16213e; // 次背景 - 深蓝紫
+@cyber-bg-tertiary: #0f3460;  // 第三背景 - 深蓝
+@cyber-bg-glass: rgba(255, 255, 255, 0.1); // 玻璃质感背景
+@cyber-bg-glass-dark: rgba(0, 0, 0, 0.2);  // 深色玻璃背景
+
+// 文字色彩
+@cyber-text-primary: #ffffff; // 主文字 - 白色
+@cyber-text-secondary: #e2e8f0; // 次文字 - 浅灰白
+@cyber-text-muted: #94a3b8;   // 弱化文字 - 中灰
+@cyber-text-accent: #ff00ff;  // 强调文字 - 洋红色
+
+// 边框和阴影 - 更柔和的发光效果
+@cyber-border: rgba(255, 0, 255, 0.4);
+@cyber-border-active: rgba(255, 0, 255, 0.8);
+@cyber-border-blue: rgba(59, 130, 246, 0.4);
+@cyber-border-purple: rgba(139, 92, 246, 0.4);
+@cyber-shadow: rgba(255, 0, 255, 0.3);
+@cyber-shadow-active: rgba(255, 0, 255, 0.6);
+@cyber-shadow-blue: rgba(59, 130, 246, 0.3);
+@cyber-shadow-purple: rgba(139, 92, 246, 0.3);
+
 // 控制首页架子左边导航菜单栏的宽度
 @base-menu-width: 300px;
 // 左侧导航栏最小宽度
@@ -12,6 +47,37 @@
 */
 :root {
     --base-menu-logo-height: max(100px, @base-temp-menu-logo-height);
+    
+    // 明亮赛博朋克主题CSS变量
+    --cyber-primary: @cyber-primary;
+    --cyber-secondary: @cyber-secondary;
+    --cyber-accent: @cyber-accent;
+    --cyber-success: @cyber-success;
+    --cyber-warning: @cyber-warning;
+    --cyber-error: @cyber-error;
+    --cyber-purple: @cyber-purple;
+    --cyber-blue: @cyber-blue;
+    --cyber-pink: @cyber-pink;
+    
+    --cyber-bg-primary: @cyber-bg-primary;
+    --cyber-bg-secondary: @cyber-bg-secondary;
+    --cyber-bg-tertiary: @cyber-bg-tertiary;
+    --cyber-bg-glass: @cyber-bg-glass;
+    --cyber-bg-glass-dark: @cyber-bg-glass-dark;
+    
+    --cyber-text-primary: @cyber-text-primary;
+    --cyber-text-secondary: @cyber-text-secondary;
+    --cyber-text-muted: @cyber-text-muted;
+    --cyber-text-accent: @cyber-text-accent;
+    
+    --cyber-border: @cyber-border;
+    --cyber-border-active: @cyber-border-active;
+    --cyber-border-blue: @cyber-border-blue;
+    --cyber-border-purple: @cyber-border-purple;
+    --cyber-shadow: @cyber-shadow;
+    --cyber-shadow-active: @cyber-shadow-active;
+    --cyber-shadow-blue: @cyber-shadow-blue;
+    --cyber-shadow-purple: @cyber-shadow-purple;
 }
 
 @base-temp-menu-logo-height: 100px;

@@ -75,28 +75,89 @@ const handleSkip = async (path) => {
 <style lang="less" scoped>
 .menu {
   --el-menu-bg-color: transparent;
-  border-radius: 30px;
+
   .el-sub-menu span,
   .el-menu-item span {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    letter-spacing: 0.5px;
   }
+
   .el-menu-item {
-    backdrop-filter: blur(100px);
-    -webkit-backdrop-filter: blur(100px);
-    margin: 15px 0;
-    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    margin: 6px 0;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    background: @cyber-bg-glass;
+
+    &:hover {
+      border-color: @cyber-border;
+      box-shadow: 0 8px 25px @cyber-shadow;
+      transform: translateX(8px);
+      background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(59, 130, 246, 0.1));
+    }
+
+    &.is-active {
+      border-color: @cyber-border-active;
+      box-shadow: 0 8px 30px @cyber-shadow-active;
+      background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(139, 92, 246, 0.2));
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, @cyber-primary, @cyber-blue);
+        border-radius: 0 2px 2px 0;
+        box-shadow: 0 0 10px @cyber-shadow;
+      }
+    }
   }
+
+  .el-sub-menu {
+    .el-sub-menu__title {
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      background: @cyber-bg-glass;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      &:hover {
+        border-color: @cyber-border;
+        box-shadow: 0 8px 25px @cyber-shadow;
+        transform: translateX(8px);
+        background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(59, 130, 246, 0.1));
+      }
+    }
+  }
+
   .el-icon {
-    margin-right: 10px;
+    margin-right: 12px;
+    font-size: 18px;
+    filter: drop-shadow(0 0 8px @cyber-shadow);
+    transition: all 0.3s ease;
+  }
+
+  .el-menu-item:hover .el-icon,
+  .el-sub-menu:hover .el-icon {
+    filter: drop-shadow(0 0 12px @cyber-shadow-active);
+    transform: scale(1.1);
   }
 }
 
 // 额外导航标签
 .foldmenu {
   .el-menu-item {
-    background: var(--el-color-primary-light-9);
-    color: var(--el-color-primary);
+    background: rgba(0, 255, 255, 0.1);
+    color: @cyber-text-primary;
+    border-color: @cyber-border;
   }
 }
 </style>
