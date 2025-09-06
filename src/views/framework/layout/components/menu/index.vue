@@ -3,6 +3,8 @@
 import { useRouter } from 'vue-router'
 import { layoutSettingStoreFn } from '@/utils/_store'
 
+import { ElMessage } from 'element-plus'
+
 // 自命名 --- 梳理结构时更清晰
 defineOptions({
   name: 'layoutMenu',
@@ -16,8 +18,14 @@ defineProps({
 // 创建路由实例
 const router = useRouter()
 // 实现导航路由跳转
-const handleSkip = (path) => {
-  router.push(path)
+const handleSkip = async (path) => {
+  // router.push(path)
+  try {
+    await router.push(path)
+  } catch {
+    // console.error('路由跳转失败:', error)
+    ElMessage.error('页面不存在')
+  }
 }
 </script>
 

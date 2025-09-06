@@ -33,16 +33,17 @@ const selectedArr = ref([])
 // 确认按钮
 const confirmClick = async () => {
   // 获取当前被选择的节点数组（注意：这里半选，全选的ID全部都得带😓😓😓）
+  // 全选反选都带的目的：后期按照不停权限查找动态路由时需要了解权限全貌 --- 即：你拥有哪个权限下的哪个权限
   // 选中节点的ID
-  // let checkedKeys = treeRef.value.getCheckedKeys()
-  // // 半选的id
-  // let halfCheckedKeys = treeRef.value.getHalfCheckedKeys()
-  // let permissionId = checkedKeys.concat(halfCheckedKeys)
+  let checkedKeys = treeRef.value.getCheckedKeys()
+  // // 半选的id --- 儿子被选，但没选完，老爹也要被选，不然谁知道儿子是哪个的儿子？
+  let halfCheckedKeys = treeRef.value.getHalfCheckedKeys()
+  let permissionId = checkedKeys.concat(halfCheckedKeys)
 
   // 这里的API文档有问题，如果使用url拼接的方式传参，需要array:Number
   // 如果选择params查询参数的方式就需要传递字符串
-  let checkedKeys = treeRef.value?.getCheckedKeys()
-  let permissionId = checkedKeys.join()
+  // let checkedKeys = treeRef.value?.getCheckedKeys()
+  // let permissionId = checkedKeys.join()
   // console.log(permissionId)
   try {
     await reqUpdateRolePermission({

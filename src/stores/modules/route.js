@@ -10,8 +10,14 @@ export const useRoutesStore = defineStore(
   () => {
     // 设置路由 --- 为了菜单导航做准备
     const routes = ref([...constantRoute])
+
+    // 存入路由 --- 异步路由
+    const setRoutes = (asyncRoute) => {
+      routes.value = [...constantRoute, ...asyncRoute]
+    }
     return {
       routes,
+      setRoutes,
     }
   },
   {

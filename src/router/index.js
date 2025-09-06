@@ -20,4 +20,18 @@ const router = createRouter({
   },
 })
 
+// 添加路由缓存 --- 防止重复导航报错
+/*
+ *当用户在同一个导航上重复点击时，会产生NavigationDuplicated 错误
+ *所以该方法就是重写了router.push方法。让其保持控制台清洁，并且不影响其他类型错误的正常处理
+ */
+const routerPush = router.push
+router.push = function push(location) {
+  return routerPush.call(this, location).catch((err) => {
+    if (err.name !== 'NavigationDuplicated') {
+      throw err
+    }
+  })
+}
+
 export default router
