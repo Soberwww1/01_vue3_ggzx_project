@@ -13,6 +13,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import Unocss from 'unocss/vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -47,6 +48,7 @@ export default defineConfig(({ command, mode }) => {
         iconDirs: [resolve(fileURLToPath(new URL('./src/assets/icons', import.meta.url)))],
         symbolId: 'icon-[dir]-[name]',
       }),
+      Unocss(), // 仅打包用到的css
     ],
     // 全局配置使用 less 变量
     css: {
@@ -79,6 +81,10 @@ export default defineConfig(({ command, mode }) => {
           rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), ''),
         },
       },
+    },
+    build: {
+      // 提高告警阈值1000KB（1MB）
+      chunkSizeWarningLimit: 3000,
     },
   }
 })

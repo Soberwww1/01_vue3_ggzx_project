@@ -2,6 +2,7 @@
 // 导入store工具函数
 import { userStoreFn } from '@/utils/_store'
 import getTimeService from '@/utils/time'
+import defaultAvatar from '@/assets/images/default.png'
 </script>
 
 <template>
@@ -15,9 +16,6 @@ import getTimeService from '@/utils/time'
         </div>
       </div>
     </el-card>
-    <div class="bottom2">
-      <!-- <SvgIcon name="welcome" width="600px" height="500px"></SvgIcon> -->
-    </div>
   </div>
 </template>
 
@@ -43,11 +41,5 @@ import getTimeService from '@/utils/time'
       color: skyblue;
     }
   }
-}
-
-.bottom2 {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
 }
 </style>
