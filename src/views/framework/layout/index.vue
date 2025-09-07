@@ -66,7 +66,7 @@ const handleClose = () => {}
         <layoutTobbar></layoutTobbar>
       </el-header>
       <!-- 架子主体 --- main二级路由跳转页面 -->
-      <el-main style="background-color: pink">
+      <el-main>
         <!-- <el-main> -->
         <!-- 在这里插入自行封装的Main组件（说白了里面还是router-view） -->
         <layoutMain></layoutMain>
